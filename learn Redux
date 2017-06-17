@@ -1,0 +1,45 @@
+   Store
+what:
+保存数据的地方；
+why：
+just Design pattern need 
+how:
+createStore函数 接受另一个函数作为参数，返回新生成的store对象
+const store=createStore(fn);
+
+  State
+what:
+对不同时间点的Store生成快照，这些快照时点的  集合 就是state；
+why：
+need rollback？
+how：
+const store=createStore(fn);
+store.getState();
+
+/*feature*/
+view、 state一个知道了，另一个就知道了。
+
+  Action
+what：view发送给xx？？（补充：Store）的  通知  ，State应该变化了----------其运送数据到store，也是改变state的唯一办法
+why：用户接触不到State，只能接触到View，
+how:
+const action = {
+  type: 'ADD_TODO',
+  payload: 'Learn Redux'
+};
+
+   Action Creator
+function addTodo(text) {
+  return {
+    type: ADD_TODO,
+    text
+  }
+}
+返回的一个action对象,注意返回值，以前欠缺这习惯。
+const action = addTodo('Learn Redux');
+
+view发出Action的写法：
+store.dispatch(addTodo("learn redux"));
+
+完整流程：View发送通知Action，运送数据到store，State改变---View改变
+
